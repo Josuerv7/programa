@@ -91,40 +91,40 @@
                 return;
             }
 
-            fetch('/verify-recaptcha.php', { // Verifica la URL correcta aquí
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ recaptchaResponse })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    fetch('/login', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ username, password })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.status === 'ok') {
-                            window.location.href = '/';
-                        } else {
-                            document.getElementById('login-message').innerText = 'Error al iniciar sesión';
-                        }
-                    })
-                    .catch(error => {
-                        console.error(error);
-                        document.getElementById('login-message').innerText = 'Error al iniciar sesión';
-                    });
-                } else {
-                    document.getElementById('login-message').innerText = 'Error de reCAPTCHA';
-                }
-            })
-            .catch(error => {
-                console.error(error);
-                document.getElementById('login-message').innerText = 'Error al verificar el reCAPTCHA';
-            });
-        });
+        //     fetch('/verify-recaptcha.php', { // Verifica la URL correcta aquí
+        //         method: 'POST',
+        //         headers: { 'Content-Type': 'application/json' },
+        //         body: JSON.stringify({ recaptchaResponse })
+        //     })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         if (data.success) {
+        //             fetch('/login', {
+        //                 method: 'POST',
+        //                 headers: { 'Content-Type': 'application/json' },
+        //                 body: JSON.stringify({ username, password })
+        //             })
+        //             .then(response => response.json())
+        //             .then(data => {
+        //                 if (data.status === 'ok') {
+        //                     window.location.href = '/';
+        //                 } else {
+        //                     document.getElementById('login-message').innerText = 'Error al iniciar sesión';
+        //                 }
+        //             })
+        //             .catch(error => {
+        //                 console.error(error);
+        //                 document.getElementById('login-message').innerText = 'Error al iniciar sesión';
+        //             });
+        //         } else {
+        //             document.getElementById('login-message').innerText = 'Error de reCAPTCHA';
+        //         }
+        //     })
+        //     .catch(error => {
+        //         console.error(error);
+        //         document.getElementById('login-message').innerText = 'Error al verificar el reCAPTCHA';
+        //     });
+        // });
     </script>
 </body>
 </html>
