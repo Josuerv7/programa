@@ -44,6 +44,46 @@ function isAuthenticated(req, res, next) {
   }
   
 
+  // Get the reCAPTCHA response
+const recaptchaResponse = grecaptcha.getResponse();
+
+// Verify the reCAPTCHA response
+fetch('/verify-recaptcha', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ recaptchaResponse }),
+})
+.then((response) => response.json())
+.then((data) => {
+    if (data.success) {
+      // Send the login request
+      fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      })
+     .then((response) => response.json())
+     .then((data) => {
+          if (data.status === 'ok') {
+            // Redirect to the home page
+            window.location.href = '/';
+          } else {
+            // Show an error message
+            document.getElementById('login-message').innerHTML = 'Error al iniciar sesión';
+          }
+        })
+     .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      // Show an error message
+      document.getElementById('login-message').innerHTML = 'Error de reCAPTCHA';
+    }
+  })
+.catch((error) => {
+    console.error(error);
+  });
+
 // Página de inicio de sesión
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
