@@ -90,6 +90,7 @@ app.post("/login", async (req, res) => {
     }
   });
 
+
 // Proceso de registro de usuario
 app.post("/register", async (req, res) => {
     const { username, password } = req.body;
