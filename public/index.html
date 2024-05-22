@@ -91,7 +91,7 @@
                 return;
             }
 
-            fetch('/verify-recaptcha', {
+            fetch('/verify-recaptcha.php', { // Verifica la URL correcta aquí
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ recaptchaResponse })
