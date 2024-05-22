@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         body {
             margin: 0;
@@ -70,9 +70,9 @@
         </div>
         <form id="login-form">
             <label for="username">Usuario:</label><br>
-            <input type="text" id="username" name="username"><br><br>
+            <input type="text" id="username" name="username" required><br><br>
             <label for="password">Contraseña:</label><br>
-            <input type="password" id="password" name="password"><br><br>
+            <input type="password" id="password" name="password" required><br><br>
             <div class="g-recaptcha" data-sitekey="6LctMeUpAAAAAPYhyI-d_Tpa2hZx54oUxAZtqn6e"></div>
             <button type="button" id="login-button">Login</button>
         </form>
