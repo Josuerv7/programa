@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <script src="../p2.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        #register-container {
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333333;
+            text-align: center;
+        }
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="register-container">
+        <h1>Registrarse</h1>
+        <form action="/register" method="post" onsubmit="return registerUser(event)">
+            <label for="new-username">Nombre de Usuario:</label><br>
+            <input type="text" id="new-username" name="username"><br><br>
+            <label for="new-password">Contraseña:</label><br>
+            <input type="password" id="new-password" name="password"><br><br>
+            <button type="submit">Registrarse</button>
+        </form>
+        <script>
+            async function registerUser(event) {
+              event.preventDefault();
+              const username = document.getElementById('new-username').value;
+              const password = document.getElementById('new-password').value;
+            
+              try {
+                const response = await fetch('/register', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ username, password }),
+                });
+            
+                const data = await response.json();
+            
+                if (data.status === 'ok') {
+                  document.getElementById('register-message').innerHTML = 'Registrado exitosamente!';
+                  setTimeout(() => {
+                    window.location.href = '/';
+                  }, 2000); // Redirigir al index después de 2 segundos
+                } else {
+                  document.getElementById('register-message').innerHTML = 'Error al registrar usuario';
+                }
+              } catch (error) {
+                console.error(error);
+              }
+            }
+          </script>
+          
+        <div id="register-message"></div>
+    </div>
+</body>
+</body>
+</html>

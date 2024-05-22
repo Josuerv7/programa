@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        #login-container {
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333333;
+            text-align: center;
+        }
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button-link {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="login-container">
+        <div>
+            <h1>Tienda de Abarrotes Tita</h1>
+        </div>
+        <form action="/login" method="post">
+            <label for="username">Usuario:</label><br>
+            <input type="text" id="username" name="username"><br><br>
+            <label for="password">Contraseña:</label><br>
+            <input type="password" id="password" name="password"><br><br>
+            <div class="g-recaptcha" data-sitekey="tu_clave_de_sitio_web"></div>
+            <button type="submit">Login</button>
+        </form>
+        <br><br>
+        <a href="/register" class="button-link">Registrarse</a>
+    </div>
+</body>
+</html>

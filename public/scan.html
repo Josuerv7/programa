@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Authenticator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        form {
+            text-align: center;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #scan-container {
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="scan-container">
+        <h1 style="color: green;">Ingresa con <br> Google Authenticator</h1>
+        <img id="qrCodeImage" src="" alt="QR Code"><br><br>
+        <form action="/verify" method="post">
+            <label for="token">Ingresa Token:</label><br>
+            <input type="text" id="token" name="token"><br><br>
+            <button type="submit">Verificar</button>
+        </form>
+    </div>
+    <script>
+        fetch('/qr-code')
+            .then(response => response.text())
+            .then(imageUrl => {
+                document.getElementById('qrCodeImage').src = imageUrl;
+            })
+            .catch(error => console.error('Error cargando el código QR:', error));
+    </script>
+</body>
+</html>
