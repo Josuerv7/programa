@@ -85,13 +85,13 @@
             const recaptchaResponse = grecaptcha.getResponse();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            
+        
             if (recaptchaResponse.length === 0) {
                 document.getElementById('login-message').innerText = 'Debes completar el reCAPTCHA';
                 return;
             }
-
-            fetch('/verify-recaptcha.php', { // Verifica la URL correcta aquí
+        
+            fetch('/verify-recaptcha.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ recaptchaResponse })
@@ -124,8 +124,8 @@
                 console.error(error);
                 document.getElementById('login-message').innerText = 'Error al verificar el reCAPTCHA';
             });
+        });
+        </script>
         
-    });
-    </script>
 </body>
 </html>
