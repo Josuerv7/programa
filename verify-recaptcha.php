@@ -14,7 +14,7 @@ if ($data->success) {
   echo json_encode(['success' => true]);
 } else {
   // The reCAPTCHA was not verified
-  echo json_encode(['success' => false]);
+  echo json_encode(['success' 'success' => false]);
 }
 
 ?>

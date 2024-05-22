@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <script src='https://www.google.com/recaptcha/api.js' async defer onload="onRecaptchaLoaded()"></script>
+    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
     <style>
         body {
             margin: 0;
@@ -57,6 +57,10 @@
             cursor: pointer;
             text-decoration: none;
         }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -64,55 +68,63 @@
         <div>
             <h1>Tienda de Abarrotes Titaaaaaa</h1>
         </div>
-        <form action="/login" method="post">
+        <form id="login-form">
             <label for="username">Usuario:</label><br>
             <input type="text" id="username" name="username"><br><br>
             <label for="password">Contraseña:</label><br>
             <input type="password" id="password" name="password"><br><br>
             <div class="g-recaptcha" data-sitekey="6LctMeUpAAAAAPYhyI-d_Tpa2hZx54oUxAZtqn6e"></div>
-            <button type="submit">Login</button>
-            <script>// Get the reCAPTCHA response
-                const recaptchaResponse = grecaptcha.getResponse();
-                
-                // Verify the reCAPTCHA response
-                fetch('/verify-recaptcha', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ recaptchaResponse }),
-                })
-                 .then((response) => response.json())
-                 .then((data) => {
-                    if (data.success) {
-                      // Send the login request
-                      fetch('/login', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ username, password }),
-                      })
-                       .then((response) => response.json())
-                       .then((data) => {
-                          if (data.status === 'ok') {
-                            // Redirect to the home page
-                            window.location.href = '/';
-                          } else {
-                            // Show an error message
-                            document.getElementById('login-message').innerHTML = 'Error al iniciar sesión';
-                          }
-                        })
-                       .catch((error) => {
-                          console.error(error);
-                        });
-                    } else {
-                      // Show an error message
-                      document.getElementById('login-message').innerHTML = 'Error de reCAPTCHA';
-                    }
-                  })
-                 .catch((error) => {
-                    console.error(error);
-                  });</script>
+            <button type="button" id="login-button">Login</button>
         </form>
+        <div id="login-message" class="error-message"></div>
         <br><br>
         <a href="/register" class="button-link">Registrarse</a>
     </div>
+    <script>
+        document.getElementById('login-button').addEventListener('click', function() {
+            const recaptchaResponse = grecaptcha.getResponse();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (recaptchaResponse.length === 0) {
+                document.getElementById('login-message').innerText = 'Debes completar el reCAPTCHA';
+                return;
+            }
+
+            fetch('/verify-recaptcha', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ recaptchaResponse })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    fetch('/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, password })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'ok') {
+                            window.location.href = '/';
+                        } else {
+                            document.getElementById('login-message').innerText = 'Error al iniciar sesión';
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        document.getElementById('login-message').innerText = 'Error al iniciar sesión';
+                    });
+                } else {
+                    document.getElementById('login-message').innerText = 'Error de reCAPTCHA';
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                document.getElementById('login-message').innerText = 'Error al verificar el reCAPTCHA';
+            });
+        });
+    </script>
 </body>
 </html>
