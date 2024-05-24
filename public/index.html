@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
+
     <style>
         body {
             margin: 0;
@@ -57,74 +57,23 @@
             cursor: pointer;
             text-decoration: none;
         }
-        .error-message {
-            color: red;
-            margin-top: 10px;
-        }
     </style>
 </head>
 <body>
     <div id="login-container">
         <div>
-            <h1>Tienda de Abarrotes Titaaaaa23</h1>
+            <h1>Tienda de Abarrotes Tita</h1>
         </div>
-        <form id="login-form">
+        <form action="/login" method="post">
             <label for="username">Usuario:</label><br>
-            <input type="text" id="username" name="username" required><br><br>
+            <input type="text" id="username" name="username"><br><br>
             <label for="password">Contraseña:</label><br>
-            <input type="password" id="password" name="password" required><br><br>
-            <div class="g-recaptcha" data-sitekey="6LctMeUpAAAAAPYhyI-d_Tpa2hZx54oUxAZtqn6e"></div>
-            <button type="button" id="login-button">Login</button>
+            <input type="password" id="password" name="password"><br><br>
+           
+            <button type="submit">Login</button>
         </form>
-        <div id="login-message" class="error-message"></div>
         <br><br>
         <a href="/register" class="button-link">Registrarse</a>
     </div>
-    <!-- <script>
-        document.getElementById('login-button').addEventListener('click', function() {
-            const recaptchaResponse = grecaptcha.getResponse();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            if (recaptchaResponse.length === 0) {
-                document.getElementById('login-message').innerText = 'Debes completar el reCAPTCHA';
-                return;
-            } -->
-
-        <!-- //     fetch('/verify-recaptcha.php', { // Verifica la URL correcta aquí
-        //         method: 'POST',
-        //         headers: { 'Content-Type': 'application/json' },
-        //         body: JSON.stringify({ recaptchaResponse })
-        //     })
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         if (data.success) {
-        //             fetch('/login', {
-        //                 method: 'POST',
-        //                 headers: { 'Content-Type': 'application/json' },
-        //                 body: JSON.stringify({ username, password })
-        //             })
-        //             .then(response => response.json())
-        //             .then(data => {
-        //                 if (data.status === 'ok') {
-        //                     window.location.href = '/';
-        //                 } else {
-        //                     document.getElementById('login-message').innerText = 'Error al iniciar sesión';
-        //                 }
-        //             })
-        //             .catch(error => {
-        //                 console.error(error);
-        //                 document.getElementById('login-message').innerText = 'Error al iniciar sesión';
-        //             });
-        //         } else {
-        //             document.getElementById('login-message').innerText = 'Error de reCAPTCHA';
-        //         }
-        //     })
-        //     .catch(error => {
-        //         console.error(error);
-        //         document.getElementById('login-message').innerText = 'Error al verificar el reCAPTCHA';
-        //     }); -->
-        <!-- });
-    </script> -->
 </body>
 </html>
