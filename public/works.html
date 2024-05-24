@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../p2.js"></script>
+
+    <title>Tienda de Abarrotes</title>
+    <style>
+        body {
+            display: flex;
+            font-family: Arial, sans-serif;
+        }
+        .sidebar {
+            width: 25%;
+            background-color: #f4f4f4;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .content {
+            width: 75%;
+            padding: 20px;
+        }
+        .workers-section {
+            display: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .btn {
+            padding: 5px 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .btn-register {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .btn-edit {
+            background-color: #ffa500;
+            color: white;
+        }
+        .btn-delete {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+    <script>
+        function showWorkersSection() {
+            document.querySelector('.workers-section').style.display = 'block';
+        }
+
+        function registerWorker() {
+            window.location.href = 'register.html';
+        }
+
+        // function editWorker(id) {
+        //     // Aquí iría la lógica para editar un trabajador
+        //     alert("Editar trabajador con ID: " + id);
+        // }
+
+        // function deleteWorker(id) {
+        //     // Aquí iría la lógica para eliminar un trabajador
+        //     alert("Eliminar trabajador con ID: " + id);
+        // }
+    </script>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Menú</h2>
+        <button class="btn btn-register" onclick="showWorkersSection()">Trabajadores</button>
+    </div>
+    <div class="content">
+        <h1>Bienvenido a la Tienda de Abarrotes</h1>
+        <div class="workers-section">
+            <h2>Trabajadores</h2>
+            <form action="/register"></form>
+            <button class="btn btn-register" onclick="registerWorker()">Registrar nuevo trabajador</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Usuario</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Juan Pérez</td>
+                        <td>juanperez</td>
+                        <td>
+                            <button class="btn btn-edit" onclick="editWorker(1)">Editar</button>
+                            <button class="btn btn-delete" onclick="deleteWorker(1)">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>María López</td>
+                        <td>marialopez</td>
+                        <td>
+                            <button class="btn btn-edit" onclick="editWorker(2)">Editar</button>
+                            <button class="btn btn-delete" onclick="deleteWorker(2)">Eliminar</button>
+                        </td>
+                    </tr>
+                    <!-- Agrega más trabajadores según sea necesario -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

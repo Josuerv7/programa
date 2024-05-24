@@ -52,43 +52,46 @@
 <body>
     
     <div id="register-container">
-        <h1>Registrarse</h1>
+        <h2>Registra nuevo trabajador</h2>
         <form action="/register" method="post" onsubmit="return registerUser(event)">
-            <label for="new-username">Nombre de Usuario:</label><br>
+            <label for="name">Nombre:</label><br>
+            <input type="text" id="name" name="name"><br><br>
+            <label for="new-username">Usuario:</label><br>
             <input type="text" id="new-username" name="username"><br><br>
             <label for="new-password">Contraseña:</label><br>
             <input type="password" id="new-password" name="password"><br><br>
             <button type="submit">Registrarse</button>
         </form>
         <script>
-            async function registerUser(event) {
+          async function registerUser(event) {
               event.preventDefault();
               const username = document.getElementById('new-username').value;
               const password = document.getElementById('new-password').value;
-            
+              const name = document.getElementById('name').value;
+
               try {
-                const response = await fetch('/register', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ username, password }),
-                });
-            
-                const data = await response.json();
-            
-                if (data.status === 'ok') {
-                  document.getElementById('register-message').innerHTML = 'Registrado exitosamente!';
-                  setTimeout(() => {
-                    window.location.href = '/';
-                  }, 2000); // Redirigir al index después de 2 segundos
-                } else {
-                  document.getElementById('register-message').innerHTML = 'Error al registrar usuario';
-                }
+                  const response = await fetch('/register', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ username, password, name }),
+                  });
+
+                  const data = await response.json();
+
+                  if (data.status === 'ok') {
+                      document.getElementById('register-message').innerHTML = 'Registrado exitosamente!';
+                      setTimeout(() => {
+                          window.location.href = '/';
+                      }, 2000); // Redirigir al index después de 2 segundos
+                  } else {
+                      document.getElementById('register-message').innerHTML = 'Error al registrar usuario';
+                  }
               } catch (error) {
-                console.error(error);
+                  console.error(error);
+                  document.getElementById('register-message').innerHTML = 'Error al registrar usuario';
               }
-            }
-          </script>
-          
+          }
+      </script>
         <div id="register-message"></div>
     </div>
 </body>

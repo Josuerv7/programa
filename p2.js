@@ -118,11 +118,15 @@ app.get("/scan", isAuthenticated, (req, res) => {
     const { token } = req.body;
     const isVerified = verifyToken(token, secretBase32);
     if (isVerified) {
-      res.send("<h2 style='text-align: center; color: green;'>¡Autenticación exitosa!</h2>");
+        res.redirect('/works.html'); // Asegúrate de que 'register.html' esté en la carpeta 'public'
     } else {
-      res.send("<h2 style='text-align: center; color: red;'>¡Token inválido!</h2>");
+        res.send("<h2 style='text-align: center; color: red;'>¡Token inválido!</h2>");
     }
 });
+
+
+
+
 
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
