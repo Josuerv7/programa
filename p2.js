@@ -95,11 +95,12 @@ app.post("/login", async (req, res) => {
 
 // Proceso de registro de usuario
 app.post("/register", async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, name } = req.body;
     try {
         const response = await axios.post("https://mvp6e.000webhostapp.com/adduser.php", new URLSearchParams({
             usuario: username,
-            contrasena: password
+            contrasena: password,
+            nombre: name
         }));
         res.json(response.data);
     } catch (error) {

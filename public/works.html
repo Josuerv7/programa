@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="../p2.js"></script>
 
     <title>Tienda de Abarrotes</title>
@@ -79,7 +81,11 @@
 <body>
     <div class="sidebar">
         <h2>Menú</h2>
-        <button class="btn btn-register" onclick="showWorkersSection()">Trabajadores</button>
+        <button class="btn btn-register" onclick="showWorkersSection()">Trabajadores</button> <br>
+        <button class="btn btn-register" onclick="showCustomers()">Clientes</button> <br>
+        <button class="btn btn-register" onclick="showProducts()">Productos</button> <br>
+
+
     </div>
     <div class="content">
         <h1>Bienvenido a la Tienda de Abarrotes</h1>
@@ -103,7 +109,7 @@
                         <td>juanperez</td>
                         <td>
                             <button class="btn btn-edit" onclick="editWorker(1)">Editar</button>
-                            <button class="btn btn-delete" onclick="deleteWorker(1)">Eliminar</button>
+                            <button class="btn btn-danger" onclick="deleteWorker(1)">Eliminar</button>
                         </td>
                     </tr>
                     <tr>
