@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Authenticator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         body {
             margin: 0;
@@ -12,17 +13,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-        }
-        form {
-            text-align: center;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            background-color: #f8f9fa;
         }
         #scan-container {
             background-color: #ffffff;
@@ -30,17 +21,21 @@
             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
             padding: 20px;
             text-align: center;
+            max-width: 400px;
+            width: 100%;
         }
     </style>
 </head>
 <body>
-    <div id="scan-container">
-        <h1 style="color: green;">Ingresa con <br> Google Authenticator</h1>
-        <img id="qrCodeImage" src="" alt="QR Code"><br><br>
+    <div id="scan-container" class="container">
+        <h3 class="text-success">Ingresa con <br> Google Authenticator</h3>
+        <img id="qrCodeImage" class="img-fluid mb-3" src="" alt="QR Code">
         <form action="/verify" method="post">
-            <label for="token">Ingresa Token:</label><br>
-            <input type="text" id="token" name="token"><br><br>
-            <button type="submit">Verificar</button>
+            <div class="form-group">
+                <label for="token">Ingresa Token:</label>
+                <input type="text" class="form-control" id="token" name="token">
+            </div>
+            <button type="submit" class="btn btn-success">Verificar</button>
         </form>
     </div>
     <script>
