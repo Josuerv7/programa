@@ -44,6 +44,8 @@ function isAuthenticated(req, res, next) {
   }
   
 
+ 
+
 // Página de inicio de sesión
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
