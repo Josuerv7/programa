@@ -36,16 +36,16 @@
         <h2>Registra nuevo trabajador</h2>
         <form action="/register" method="post" onsubmit="return registerUser(event)">
             <div class="form-group">
-                <label for="name">Nombre:</label>
-                <input type="text" class="form-control" id="name" name="name">
+                <label for="NewName">Nombre:</label>
+                <input type="text" class="form-control" id="NewName" name="NewName">
             </div>
             <div class="form-group">
-                <label for="new-username">Usuario:</label>
-                <input type="text" class="form-control" id="new-username" name="username">
+                <label for="NewUsername">Usuario:</label>
+                <input type="text" class="form-control" id="NewUsername" name="username">
             </div>
             <div class="form-group">
-                <label for="new-password">Contraseña:</label>
-                <input type="password" class="form-control" id="new-password" name="password">
+                <label for="NewPassword">Contraseña:</label>
+                <input type="password" class="form-control" id="NewPassword" name="password">
             </div>
             <button type="submit" class="btn btn-success">Registrarse</button>
         </form>
@@ -54,33 +54,30 @@
 
     <script>
         async function registerUser(event) {
-            event.preventDefault();
-            const username = document.getElementById('new-username').value;
-            const password = document.getElementById('new-password').value;
-            const name = document.getElementById('name').value;
+    event.preventDefault();
+            const username = document.getElementById('NewUsername').value;
+            const password = document.getElementById('NewPassword').value;
+            const name = document.getElementById('NewName').value;
 
-            try {
-                const response = await fetch('/register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, password, name }),
-                });
+    try {
+        const response = await fetch('/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password, name }),
+        });
 
-                const data = await response.json();
+        const data = await response.json();
 
-                if (data.status === 'ok') {
-                    document.getElementById('register-message').innerHTML = '<div class="alert alert-success">¡Registrado exitosamente!</div>';
-                    setTimeout(() => {
-                        window.location.href = '/';
-                    }, 2000); // Redirigir al index después de 2 segundos
-                } else {
-                    document.getElementById('register-message').innerHTML = '<div class="alert alert-danger">Error al registrar usuario</div>';
-                }
-            } catch (error) {
-                console.error(error);
-                document.getElementById('register-message').innerHTML = '<div class="alert alert-danger">Error al registrar usuario</div>';
-            }
+        if (data.status === 'ok') {
+            document.getElementById('register-message').innerHTML = '<div class="alert alert-success">¡Registrado exitosamente!</div>';
+        } else {
+            document.getElementById('register-message').innerHTML = '<div class="alert alert-danger">Error al registrar usuario</div>';
         }
+    } catch (error) {
+        console.error(error);
+        document.getElementById('register-message').innerHTML = '<div class="alert alert-danger">Error</div>';
+    }
+}
     </script>
 </body>
 </html>

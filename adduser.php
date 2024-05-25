@@ -7,8 +7,10 @@ $username = "id22182335_usuarios_db";
 $password = "Usuarios_db1234";
 $dbname = "id22182335_usuarios_db";
 
+
+$nombre = $_POST["nombre"];
 $usuario = $_POST["usuario"];
-$contrasena = $_POST["contrasena"];
+$contrasena = password_hash($_POST["contrasena"], PASSWORD_BCRYPT); // Hash de la contraseña
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -18,13 +20,13 @@ if ($conn->connect_error) {
     die(json_encode(array("status" => "Connection failed: " . $conn->connect_error)));
 }
 
-$sql = $conn->prepare("INSERT INTO usuarios_db (usuario, contrasena) VALUES (?, ?)");
-$sql->bind_param("ss", $usuario, $contrasena);
+$sql = $conn->prepare("INSERT INTO usuarios_db (usuario, contrasena, nombre) VALUES (?, ?, ?)");
+$sql->bind_param("sss", $usuario, $contrasena, $nombre);
 
 if ($sql->execute() === TRUE) {
     echo json_encode(array("status" => "ok"));
 } else {
-    echo json_encode(array("status" => "Error: " . $sql . "<br>" . $conn->error));
+    echo json_encode(array("status" => "Error: " . $sql->error));
 }
 
 $sql->close();
