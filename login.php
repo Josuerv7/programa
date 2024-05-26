@@ -2,7 +2,7 @@
 
 header("Content-type: application/json; charset=utf-8");
 
-$servername = "localhost";
+$servername = "localhost"; 
 $username = "id22182335_usuarios_db";
 $password = "Usuarios_db1234";
 $dbname = "id22182335_usuarios_db";
