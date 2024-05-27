@@ -43,9 +43,6 @@ function isAuthenticated(req, res, next) {
     }
   }
   
-
- 
-
 // Página de inicio de sesión
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -77,7 +74,7 @@ app.get("/qr-code", (req, res) => {
 app.post("/login", async (req, res) => {
     const { username, password } = req.body;
     try {
-      const response = await axios.post("https://mvp6e.000webhostapp.com/login.php", new URLSearchParams({
+      const response = await axios.post("https://apitienda5e.000webhostapp.com/5e/login.php", new URLSearchParams({
         usuario: username,
         contrasena: password
       }));
@@ -97,7 +94,7 @@ app.post("/login", async (req, res) => {
 app.post("/register", async (req, res) => {
     const { username, password, name } = req.body;
     try {
-        const response = await axios.post("https://mvp6e.000webhostapp.com/adduser.php", new URLSearchParams({
+        const response = await axios.post("https://apitienda5e.000webhostapp.com/5e/adduser.php", new URLSearchParams({
             usuario: username,
             contrasena: password,
             nombre: name
